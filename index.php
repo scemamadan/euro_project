@@ -5,13 +5,13 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-		<h1>Choisissez le parti politique de votre choix</h1>
+		<h1>Demox</h1>
 		<div id="content-wrapper">
-			<form action="focus.php" method="POST">
+			<form action="focus.php" method="GET">
 
-				<input type="text" placeholder="Saisissez le hashtag" name="hashtag_name"/>
-				<input type="submit" />
-
+				<input class="btn" id="search-bar" type="text" placeholder="Saisissez le hashtag" name="hashtag_name"/>
+				<input class="btn submit" type="submit" />
+				<hr />
 			</form>
 		</div>
 	</body>
