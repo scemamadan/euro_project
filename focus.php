@@ -48,7 +48,14 @@ function isTweet($tweet){
 		return false;
 	}
 }
-
+function geoEnabled($tweet){
+	if($tweet['geo'] !== null){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 if(isset($_GET['hashtag_name']) ){
 				$hashtag = $_GET['hashtag_name'];
 				$focus_id = time();				

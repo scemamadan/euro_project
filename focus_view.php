@@ -1,3 +1,24 @@
+<?php
+$markers = array();
+foreach ($tweets as $tweet) {
+	if(isTweet($tweet)){
+		if(geoEnabled($tweet)){
+			$tweet_lat = $tweet['geo']['coordinates']['0'];
+			$tweet_long = $tweet['geo']['coordinates']['1'];
+			$marker = array(
+				'lat' =>$tweet_lat,
+				'long' => $tweet_long,
+				'text' => $tweet['text'],
+				'user' => $tweet['user']['screen_name'],
+				'date' => $tweet['created_at'],
+			);
+			array_push($markers, $marker);
+		}
+	}
+}
+	include('javascript.php');
+
+?>
 <html>
 	<head>
 		<title>Projet BDD ISEP 2014 - résultats</title>
@@ -20,11 +41,4 @@
 	</body>
 </html>
 <hr/>
-<?php
-	foreach ($tweets as $tweet) {
-
-	if(isTweet($tweet)){
-		echo $tweet['id']."-".$tweet['created_at']."]". $tweet['text']."<br /><br />";
-	}
-}
-?>
+<?php var_dump($markers);?>
