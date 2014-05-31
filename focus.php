@@ -15,7 +15,6 @@ function tweet_exist($id_tweet){
 		return false;
 	}
 }
-
 function increment_request($hashtag){
 	// incrémente la valeur dans le bdd + retourne le nombre de fois que le le hashtag a été asked
 	$m = new MongoClient(); // connect
@@ -74,6 +73,59 @@ function get_best_rt($hashtag){
 	}
 	return $tops;
 }
+
+function getCountryStat($hashtag){
+	$m = new MongoClient(); // connect
+	$db = $m->selectDB("mydb");
+	$collection = new MongoCollection($db, $hashtag); // on met le hashtag comme nom de collection
+	$geoQuery = array('geo' => array('$ne' => null));
+	$data = array();	
+
+$cursor = $collection->find($geoQuery);
+foreach ($cursor as $doc) {
+   	$data[] = $doc['place']['country'];
+}
+	
+	$country = array();
+	$total =0;
+	for ($i=0; $i < count($data); $i++) { 
+		$theCountry = $data[$i];
+			if($theCountry != null){
+				if(!isset($country[$theCountry])){
+					$country[$theCountry] = 1;
+					$total+=1;
+				}else{
+					$country[$theCountry] += 1;
+					$total+=1;
+				}
+			}
+	}
+	$country['total']=$total;	
+	return $country;
+}
+
+function getDataFlow($hashtag){
+	$m = new MongoClient(); // connect
+	$db = $m->selectDB("mydb");
+	$collection = new MongoCollection($db, $hashtag); // on met le hashtag comme nom de collection
+	$tab = array();	
+	
+	$cursor = $collection->find();
+foreach ($cursor as $doc) {
+	if(!isset($doc['created_at'])){
+		
+	}else{
+	$formattedDate = date('Y-m-d H', strtotime($doc['created_at']));
+			if(!isset($tab[$formattedDate])){
+				$tab[$formattedDate] = 1;
+			}else{
+				$tab[$formattedDate] += 1;
+			}
+		}
+	}
+	return $tab;			
+}
+
 function get_best_favo($hashtag){
 	$m = new MongoClient(); // connect
 	$db = $m->selectDB("mydb");

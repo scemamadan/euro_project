@@ -24,6 +24,11 @@ foreach ($tweets as $tweet) {
 		<title>Projet BDD ISEP 2014 - résultats</title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="style.css">
+		
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+		<script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
 	</head>
 	<body>
 
@@ -76,9 +81,85 @@ foreach ($tweets as $tweet) {
 					<?php } ?>
 						</td>
 					</tr>
+					</table>
 				</section>
 			</div>
 		</div>
+		
+		<div class="">
+			<section class="rank_section">
+			<div id="donut-example" style="height: 250px;"></div>
+			<?php $country = getCountryStat($hashtag);?> 
+			</section>
+		</div>
+
+<script>
+	var data1 =<?php echo json_encode($country);?>;
+    var dataTograph = [];
+  
+  for (var key in data1){
+  	var x = ((data1[key]/data1["total"])*100).toFixed(2);
+  	if(key != "total"){
+  	dataTograph.push({label:key, value: x});  	
+  	}
+}
+	Morris.Donut({
+	  element: 'donut-example',
+	  data: dataTograph
+	
+	});
+</script>
+	
+	<div>
+		<section class="rank_section">
+		<div id="myfirstchart" style="height: 250px;"></div>
+		<?php $dataFlow = getDataFlow($hashtag);?> 	
+		</section>
+	</div>
+
+
+<script>
+	var data1 =<?php echo json_encode($dataFlow);?>;
+  var anElement = {}; 
+  var dataTograph = [];
+  
+  for (var key in data1){
+  	dataTograph.push({period:key,value:data1[key]});  	
+}
+	
+	// sort by date min to max correctly
+	dataTograph.sort(function(a,b){
+	var c = new Date(a.period);
+	var d = new Date(b.period);
+	return c-d;
+	});
+	
+
+new Morris.Bar({
+  // ID of the element in which to draw the chart.
+  element: 'myfirstchart',
+
+  data: dataTograph,
+
+
+  // The name of the data record attribute that contains x-values.
+  xkey: 'period',
+  // A list of names of data record attributes that contain y-values.
+  ykeys: ['value'],
+  // Labels for the ykeys -- will be displayed when you hover over the
+  // chart.
+  labels: ['Value'], 
+  barColors: function (row, series, type) {
+    if (type === 'bar') {
+      var red = Math.ceil(255 * row.y / this.ymax);
+      return 'rgb(' + red + ',0,0)';
+    }
+    else {
+      return '#000';
+    }
+  }
+});
+</script>
 	
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNybVSoDz8pPpfhvZmb-ZUYk6sxy2FwjM&sensor=FALSE"></script>
 	<script src="gmaps_script.js" type="text/javascript"></script>
