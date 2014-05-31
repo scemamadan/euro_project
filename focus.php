@@ -56,6 +56,42 @@ function geoEnabled($tweet){
 		return false;
 	}
 }
+function get_best_rt($hashtag){
+	$m = new MongoClient(); // connect
+	$db = $m->selectDB("mydb");
+	$collection = new MongoCollection($db, $hashtag); // on met le hashtag comme nom de collection
+	$cursor = $collection->find()->sort(array('retweet_count' => -1))->limit(3);
+	$tops = array();
+	foreach ($cursor as $top_tweet) {
+			$elem = array(
+				'name' => $top_tweet['user']['screen_name'],
+				'nb_rt'  => $top_tweet['retweet_count'],
+				'text' => $top_tweet['text'],
+				'date' => $top_tweet['created_at'],
+				'pp_image' => $top_tweet['user']['profile_image_url'],
+			);
+			array_push($tops, $elem);
+	}
+	return $tops;
+}
+function get_best_favo($hashtag){
+	$m = new MongoClient(); // connect
+	$db = $m->selectDB("mydb");
+	$collection = new MongoCollection($db, $hashtag); // on met le hashtag comme nom de collection
+	$cursor = $collection->find()->sort(array('favorite_count' => -1))->limit(3);
+	$tops = array();
+	foreach ($cursor as $top_tweet) {
+		$elem = array(
+			'name' => $top_tweet['user']['screen_name'],
+			'nb_fav'  => $top_tweet['favorite_count'],
+			'text' => $top_tweet['text'],
+			'date' => $top_tweet['created_at'],
+			'pp_image' => $top_tweet['user']['profile_image_url'],
+		);
+		array_push($tops, $elem);
+	}
+	return $tops;
+}
 if(isset($_GET['hashtag_name']) ){
 				$hashtag = $_GET['hashtag_name'];
 				$focus_id = time();				
@@ -115,7 +151,7 @@ if(isset($_GET['hashtag_name']) ){
 
 	$tweets = $collection->find();
  
-	include('focus_view.php');
+	include('focus_view.php'); // insertion de la vue
 }
 else{
 	header("location: index.php");

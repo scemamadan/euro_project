@@ -28,11 +28,55 @@ foreach ($tweets as $tweet) {
 	<body>
 
 
-		<h1>Etude sur <?php echo $hashtag." - ".$focus_id; ?></h1>
+		<h1>#<?php echo $hashtag;?></h1>
 
 		<div id="content-wrapper">
 			<div id="map-canvas">
+			</div>
+			<div id="best-tweets">
+				<section class="rank_section">
+					<h3>Les plus Retweetés</h3>
+					<table class="rank_tweet">
+					<?php
+					$best_rt = get_best_rt($hashtag);
+					
+					foreach($best_rt as $elem){
+					?>
+					<tr>
+						<td>
 
+						<span class="best-line">
+								<span class="best-tweet-nb"><?php echo $elem['nb_rt'];?></span> by <a href="http://twitter.com/<?php echo $elem['name'];?>" class="best-tweet-name"><?php echo $elem['name'];?></a>
+									<br />
+									<span class="best-tweet-date"><?php echo $elem['date'];?></span>
+								<p class="best-tweet-text"> <img class="best-tweet-pp" src="<?php echo $elem['pp_image'];?>"/> <?php echo $elem['text'];?></p>
+						</span>
+
+					<?php } ?>
+						</td>
+					</tr>
+					</table>
+				</section>
+				<section class="rank_section">
+					<h3>Les plus favoris</h3>
+					<table class="rank_tweet">
+
+					<?php
+					$best_rt = get_best_favo($hashtag);
+					foreach($best_rt as $elem){
+					?>
+					<tr>
+						<td>
+							<span class="best-line">
+									<span class="best-tweet-nb"><?php echo $elem['nb_fav'];?></span> by <a href="http://twitter.com/<?php echo $elem['name'];?>" class="best-tweet-name"><?php echo $elem['name'];?></a>
+									<br />
+									<span class="best-tweet-date"><?php echo $elem['date'];?></span>
+									<p class="best-tweet-text"> <img class="best-tweet-pp" src="<?php echo $elem['pp_image'];?>"/> <?php echo $elem['text'];?></p>
+							</span>
+					<?php } ?>
+						</td>
+					</tr>
+				</section>
 			</div>
 		</div>
 	
@@ -40,5 +84,3 @@ foreach ($tweets as $tweet) {
 	<script src="gmaps_script.js" type="text/javascript"></script>
 	</body>
 </html>
-<hr/>
-<?php var_dump($markers);?>

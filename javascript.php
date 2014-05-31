@@ -2,6 +2,7 @@
 	function initialize() {
 		  var mapOptions = {
 		    zoom: 2,
+		    scrollwheel: false,
 		    center: new google.maps.LatLng(48.76632797237075, 2.3291015625)
 		  };
 
@@ -23,7 +24,6 @@ foreach ($markers as $marker) {
 
 			var infowindow<?php echo $i;?> = new google.maps.InfoWindow({
 			      content: contentString,
-			      maxWidth: 200
 			  });
 
 			marker<?php echo $i;?> = new google.maps.Marker({

@@ -10,6 +10,12 @@ h1, h2, h3{
 	color : gray;
 	text-align: center;
 }
+#loader-gif{
+	width:50px;
+	margin: auto;
+	position: relative;
+	left: -150px;
+}
 #content-wrapper{
 	width: 100%;
 	text-align: center;
@@ -26,4 +32,35 @@ h1, h2, h3{
 	width:400px;
 	font-size:16px;
 	color:#383e5a;
+}
+.rank_tweet{
+	border: 1px solid gray;
+	border-radius: 6px;
+}
+.rank_tweet td{
+	height: 80px;
+	border-bottom: 1px solid gray;
+}
+.best-tweet-nb{
+	color: red;
+	font-weight: bold;
+}
+.best-tweet-name{
+	font-style: italic;
+	text-decoration: none;
+	color: #4099FF;
+}
+.best-tweet-date{
+	font-size: 10px;
+}
+.best-tweet-text{
+	font-style: italic;
+}
+.best-tweet-pp{
+	float:left;
+}
+.rank_section{
+	width: 48.5%;
+	float:left;
+	margin-left: 1%;
 }
