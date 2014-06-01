@@ -7,7 +7,7 @@ body{
 	/*background-color: #679dd9;*/
 }
 h1, h2, h3{
-	color : gray;
+	color : #4099FF;
 	text-align: center;
 }
 #loader-gif{
@@ -15,6 +15,7 @@ h1, h2, h3{
 	margin: auto;
 	position: relative;
 	left: -150px;
+	display:none;
 }
 #content-wrapper{
 	width: 100%;
@@ -63,4 +64,23 @@ h1, h2, h3{
 	width: 48.5%;
 	float:left;
 	margin-left: 1%;
+}
+.best-hashtags{
+	width:25%;
+	min-width: 300px;
+	margin: auto;
+	border: 1px solid;
+	border-radius: 6px;
+}
+.best-hashtags td{
+	border-top: 1px solid gray;
+	
+}
+.best-hashtags thead{
+	color: #4099FF;
+}
+.best-hashtags .hashtag-name{
+	font-size: 18px;
+	color: #F3203D;
+
 }

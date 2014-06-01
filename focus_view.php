@@ -21,7 +21,7 @@ foreach ($tweets as $tweet) {
 ?>
 <html>
 	<head>
-		<title>Projet BDD ISEP 2014 - résultats</title>
+		<title>Tweets analyse #<?php echo $hashtag;?></title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		
@@ -33,7 +33,12 @@ foreach ($tweets as $tweet) {
 	<body>
 
 
-		<h1>#<?php echo $hashtag;?></h1>
+		<h1>
+			#<?php echo $hashtag;?>
+		<br />	
+			<span class="subtitle-focus-h1" style="font-size:12px;">ajout de  <?php echo $how_many_new_tweets;?> nouveaux tweets soit un total de <?php echo count_all_tweets($hashtag);?> tweets.</span>
+
+		</h1>
 
 		<div id="content-wrapper">
 			<div id="map-canvas">

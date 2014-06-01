@@ -1,3 +1,6 @@
+<?php 
+include('focus_model.php');
+?>
 <html>
 	<head>
 		<title>Projet BDD ISEP 2014</title>
@@ -11,9 +14,29 @@
 
 				<input class="btn" id="search-bar" type="text" placeholder="Saisissez le hashtag" name="hashtag_name" required />
 				<input id="submit-btn" class="btn submit" type="submit" onclick='showLoader();' />
-				<br /><img id="loader-gif" style="width:50px;display:none;" src='http://erlen.co.uk/wp-content/uploads/2013/04/Erlens-Animated-Twitter-Birl.gif'/>
+				<br /><img id="loader-gif" src='img/loader.gif'/>
 				<hr />
 			</form>
+				<table class="best-hashtags">
+					<thead>
+					  <tr>
+					     <th>LE TOP 5 DES HASHTAGS</th>
+					  </tr>
+					 </thead>
+					<?php
+					$top_hashtags = get_top_hashtags();
+					for($i = 0 ; $i <5 ; $i++){					
+					?>
+					<tr>
+						<td>
+						<span class="best-line">
+							<span><span class="hashtag-name">#<?php echo $top_hashtags[$i][1];?></span> : <?php echo $top_hashtags[$i][0]; ?> fois</span>
+						</span>
+					<?php } ?>
+						</td>
+					</tr>
+				</table>
+		<?php var_dump(count_all_tweets('TSONGA'));?>
 		</div>
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script>
@@ -37,9 +60,6 @@
 			                complete: loop});
 			        }});
 			}
-
-
-
 		</script>
 	</body>
 </html>
