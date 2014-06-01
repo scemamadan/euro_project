@@ -36,7 +36,6 @@ include('focus_model.php');
 						</td>
 					</tr>
 				</table>
-		<?php var_dump(count_all_tweets('TSONGA'));?>
 		</div>
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script>

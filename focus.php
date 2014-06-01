@@ -20,9 +20,9 @@ if(isset($_GET['hashtag_name']) ){
 				$toa = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
 
 				global $last_id;
-
+				// on ajoute %23 pour préciser que l'on souhaite que les tweets avec les hashtags
 				$query = array(
-				  "q" => $hashtag,
+				  "q" => "%23".$hashtag,
 				  "count" => "100",
 				  "max_id" => "0"
 				);
