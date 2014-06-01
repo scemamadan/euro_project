@@ -115,7 +115,10 @@ foreach ($cursor as $doc) {
 	if(!isset($doc['created_at'])){
 		
 	}else{
-	$formattedDate = date('Y-m-d H', strtotime($doc['created_at']));
+	$formattedDate = date('Y-m-d H:i:s', strtotime($doc['created_at']));
+	$formattedDate = new DateTime( $formattedDate);
+	$formattedDate->sub(new DateInterval('PT2H'));
+	$formattedDate =  $formattedDate->format('Y-m-d H');
 			if(!isset($tab[$formattedDate])){
 				$tab[$formattedDate] = 1;
 			}else{

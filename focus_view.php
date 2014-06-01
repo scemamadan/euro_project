@@ -126,14 +126,7 @@ foreach ($tweets as $tweet) {
   for (var key in data1){
   	dataTograph.push({period:key,value:data1[key]});  	
 }
-	
-	// sort by date min to max correctly
-	dataTograph.sort(function(a,b){
-	var c = new Date(a.period);
-	var d = new Date(b.period);
-	return c-d;
-	});
-	
+		
 
 new Morris.Bar({
   // ID of the element in which to draw the chart.
