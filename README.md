@@ -1,21 +1,25 @@
-euro_project
+ISEP DATABASE PROJECT - Fill a NoSQL database with tweets
 ============
 
-Database project ISEP about european election
 Technologie : PHP
 API Twitter REST 1.1
 
 index.php
 ============
-page d'accueil permettant de choisir le parti politique - Chaque parti politique étant ramené à 1 hashtag
+page d'accueil permettant de saisir le hashtag à étudier
+Cette page affiche aussi le top 5 des hashtags
 
-Hashtag par parti
+focus.php
 ============
 
-UMP : #UMPEurope2014
-PS : #NotreEurope
-FN : #FN
-Front de gauche : #reseauFDG
-Les verts : EE2014
-UDI/MODEM : #LesEuropéens
+Rôle du controlleur, cette page recupere le hashtag et recupère les tweets grace à l'API twitter
+A chaque tweet récuperer on l'insere dans la BDD NoSQL (Mongodb)
+
+focus_view.php
+============
+Rôle de la vue, permet d'afficher les tweets géolocalisés sur une carte Google Maps, ou encore d'affichercher quelques diagramme et un classement des tweets les plus celebres.
+
+focus_model.php
+============
+Regroupement de toutes les methodes PHP utiles pour le projet.
 
