@@ -50,7 +50,6 @@ if(isset($_GET['hashtag_name']) ){
 
 					$query['max_id'] = $last_id;
 					
-					$results = $toa->get('search/tweets', $query);
 
 					$compteur++;
 				}
