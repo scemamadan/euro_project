@@ -1,5 +1,5 @@
 <script>
-	function initialize() {
+function initialize() {
 		  var mapOptions = {
 		    zoom: 2,
 		    scrollwheel: false,
@@ -8,11 +8,11 @@
 
 		    var map = new google.maps.Map(document.getElementById('map-canvas'),
 		      mapOptions);
-<?php 
-$i = 0;
-foreach ($markers as $marker) {
-// = $marker['text'];
-?>
+	<?php 
+	// pour chaque marker on l'ajoute sur la carte avec du javascript
+	$i = 0;
+	foreach ($markers as $marker) {
+	?>
 
 			var latitude = <?php echo $marker['lat']; ?>;
 			var longitude = <?php echo $marker['long']; ?>;
@@ -35,8 +35,8 @@ foreach ($markers as $marker) {
 			    infowindow<?php echo $i;?>.open(map,marker<?php echo $i;?>);
 			 });
 
-<?php
-$i++;
-} ?>
-	}
+	<?php
+	$i++;
+	} ?>
+}
 </script>

@@ -1,5 +1,5 @@
 <?php 
-include('focus_model.php');
+include('focus_model.php'); // inclusion du modele comprenant les methodes php
 ?>
 <html>
 	<head>
@@ -15,6 +15,7 @@ include('focus_model.php');
 				<input class="btn" id="search-bar" type="text" placeholder="Saisissez le hashtag" name="hashtag_name" required />
 				<input id="submit-btn" class="btn submit" type="submit" onclick='showLoader();' />
 				<br /><img id="loader-gif" src='img/loader.gif'/>
+				<p id="loading-text" style="display:none;">Loading...</p>
 				<hr />
 			</form>
 				<table class="best-hashtags">
@@ -38,6 +39,7 @@ include('focus_model.php');
 				</table>
 		</div>
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="jQueryRotateCompressed.js"></script>
 		<script>
 			function showLoader(){
 				if($('#search-bar').val() !== ''){ // si l'input n'est pas vide
@@ -46,14 +48,29 @@ include('focus_model.php');
 					    $(this).find('input[type="submit"]').attr('disabled','disabled');
 					});
 					$("#loader-gif").show(); // on montre le loader
+					$("#loading-text").show();
 					loop();
 				}
 			
 			}
 			function loop() { // on repete le mouvement horizontal
+				$("#loading-text").fadeOut(3500);
 			    $('#loader-gif').animate({'left': '150'}, {
 			        duration: 3000, 
 			        complete: function() {
+			        	$("#loader-gif").rotate({
+				            duration:200,
+				            angle: 0, 
+				            animateTo:45,
+				            callback: function(){
+				            	$("#loading-text").fadeIn(0);
+				            	$("#loader-gif").rotate({
+				            	duration:400,
+				            	angle: 0, 
+				            	animateTo:0
+				            });
+				           	}
+         				 });
 			            $('#loader-gif').animate({left: -150}, {
 			                duration: 3000, 
 			                complete: loop});

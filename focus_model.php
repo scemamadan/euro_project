@@ -103,10 +103,10 @@ function getCountryStat($hashtag){
 	$geoQuery = array('geo' => array('$ne' => null));
 	$data = array();	
 
-$cursor = $collection->find($geoQuery);
-foreach ($cursor as $doc) {
-   	$data[] = $doc['place']['country'];
-}
+	$cursor = $collection->find($geoQuery);
+	foreach ($cursor as $doc) {
+	   	$data[] = $doc['place']['country'];
+	}
 	
 	$country = array();
 	$total =0;

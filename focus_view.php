@@ -1,5 +1,5 @@
 <?php
-$markers = array();
+$markers = array(); // markers est un tableau contenant tous les markers à afficher sur la carte Google Maps
 foreach ($tweets as $tweet) {
 	if(isTweet($tweet)){
 		if(geoEnabled($tweet)){

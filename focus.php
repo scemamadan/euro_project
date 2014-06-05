@@ -1,7 +1,7 @@
 <?php
 include('focus_model.php');
 if(isset($_GET['hashtag_name']) ){
-				$hashtag = strtoupper($_GET['hashtag_name']);
+				$hashtag = strtoupper($_GET['hashtag_name']); // on met le hashtag en uppercase pour eviter les doublons dans les collections de la base
 
 				require_once 'twitteroauth.php';
 				 
@@ -10,8 +10,8 @@ if(isset($_GET['hashtag_name']) ){
 				define('ACCESS_TOKEN', '21075947-6PAANtgOTJxgdseJS8RefuPwANLELYwMtNFmKxst9');
 				define('ACCESS_TOKEN_SECRET', 'F1MNz0LnwtWUrqt1u0JUdB316XxsUzJHV9M7G3Xnm334P');
 				
-				$m = new MongoClient(); // connect
-				$db = $m->selectDB("mydb");
+				$m = new MongoClient(); // on instancie l'objet mongoClient
+				$db = $m->selectDB("mydb"); // on select la bdd "mydb"
 				$collection = new MongoCollection($db, $hashtag); // on met le hashtag comme nom de collection
 
 				// on incremente le nombre de fois que ce hashtag a été saisi
@@ -38,9 +38,9 @@ if(isset($_GET['hashtag_name']) ){
 					foreach ($results->statuses as $result) {
 						// on vérifie que le tweet qu'on vient de récupérer n'est pas déja présent dans la collection
 
-						if(tweet_exist($result->id)==false){
+						if(tweet_exist($result->id)==false){ // si le tweet n'est pas déja present dans la collection
 							
-							$collection->insert($result); // on stocke dans la collection tous les tweets
+							$collection->insert($result); // on stocke dans la collection le tweet
 							$how_many_new_tweets++;
 
 						}
@@ -53,14 +53,12 @@ if(isset($_GET['hashtag_name']) ){
 
 					$compteur++;
 				}
-				
-	// affichage des tweets de la base
 
-	$tweets = $collection->find();
+	$tweets = $collection->find(); // on recupere tous les tweets de la collection dans la variable $tweets
  
 	include('focus_view.php'); // insertion de la vue
 }
 else{
-	header("location: index.php");
+	header("location: index.php"); // S'il n'y a pas de hashtag dans le get on renvoie à la page d'accueil
 }
 ?>
